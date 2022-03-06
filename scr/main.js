@@ -45,3 +45,4 @@ alert(`Se agregó al carrito: Mermelada de ${sabor}.
 Cantidad: ${cantidad}`);
 continuar = prompt('Desea continuar comprando? si o no?');
 }while (continuar !== 'no');
+
