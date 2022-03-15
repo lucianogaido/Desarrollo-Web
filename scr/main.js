@@ -18,6 +18,7 @@ const calculo = (nombreProducto, precioProducto, stockProducto, cantidadPedida, 
     const hayStock = validarStock(stockProducto, cantidadPedida);
 
     const resultado = total(cantidadPedida, precioProducto);
+
     if (hayStock) {
         console.log(`Agregaste al carrito ${cantidadPedida} ${nombreProducto} a $${precioProducto}. Total: $${resultado}`);
     } else {
@@ -32,7 +33,7 @@ do {
     1. Arandanos
     2. Ciruela
     3. Durazno
-    4. frambuesa
+    4. Frambuesa
     5. Frutilla
     6. Kiwi
     7. Mandarina
@@ -76,7 +77,7 @@ do {
     } else if (numero === 8) {
         calculo(products[7].title, products[7].price, products[7].stock, cantidadPedida = Number(prompt('Cuantas queres?')));
         agregarAlCarrito(products[7]);
-        alert(`Agregaste al carrito ${cantidadPedida} ${products[7].title} a $${products[7].price}}`)
+        alert(`Agregaste al carrito ${cantidadPedida} ${products[7].title} a $${products[7].price}`)
 
     } else if (numero === 9) {
         calculo(products[8].title, products[8].price, products[8].stock, cantidadPedida = Number(prompt('Cuantas queres?')));
@@ -86,9 +87,9 @@ do {
     } else {
         alert('ingresaste mal el numero')
     }
+    totalAPagar();
     continuar = prompt('Desea continuar comprando? si o no');
 } while (continuar !== 'no');
-totalAPagar();
 
 //*************************************************************************************************************************************                                                 F U N C I O N E S *************************************************************************************************************************************
 
@@ -102,12 +103,14 @@ function total(cantidadPedida, precioProducto) {
     return (cantidadPedida * precioProducto);
 }
 
+
+
 function agregarAlCarrito(product) {
     carrito.push(product);
 }
 
 function totalAPagar() {
-    const totalDelCarrito = carrito.reduce((acumulador, product) => acumulador + (product.price), 0);
+    const totalDelCarrito = carrito.reduce((acumulador, product) => acumulador += (product.price * cantidadPedida), 0);
     console.log("Total del carrito:" + totalDelCarrito);
     alert("Total del carrito: $" + totalDelCarrito);
 }
