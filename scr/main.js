@@ -1,4 +1,5 @@
 let totalCarrito = 0;
+                        // ARRAYS 
 const carrito = [];
 const productos = [{
         id: 1,
@@ -58,7 +59,7 @@ const productos = [{
         titulo: "Mermelada de Naranja",
         precio: 500,
         stock: 100,
-        img: "../assets/mermeladas/naranja.png"
+        img: ""
 
     },
     {
@@ -73,19 +74,6 @@ const productos = [{
 let nombre = prompt('Hola, como te llamas?');
 alert(`Hola ${nombre}. Bievenido a Nuna`);
 
-// const calculo = (nombreProducto, precioProducto, stockProducto, cantidadPedida, porcentaje) => {
-
-//     const hayStock = validarStock(stockProducto, cantidadPedida);
-
-//     const resultado = total(cantidadPedida, precioProducto);
-
-//     if (hayStock) {
-//         console.log(`Agregaste al carrito ${cantidadPedida} ${nombreProducto} a $${precioProducto}. Total: $${resultado}`);
-//     } else {
-//         console.log('No tenemos el stock suficiente');
-//     };
-
-// };
 
 
 do {
@@ -105,9 +93,7 @@ do {
         totalCarrito += valorCompra;
         alert(`Agregaste al carrito ${cantidad} ${productos[0].titulo} a $${productos[0].precio} c/u. Total $ ${valorCompra}`);
         alert(`Total del carrito : $ ${totalCarrito}`);
-        // calculo(productos[0].titulo, productos[0].precio, productos[0].stock, cantidadPedida = Number(prompt('Cuantas queres?')));
-        // agregarAlCarrito(productos[0]);
-        // alert(`Agregaste al carrito ${cantidadPedida} ${productos[0].titulo} a $${productos[0].precio}`);
+        agregarAlCarrito(productos[0]);
 
     } else if (numero === 2) {
         let cantidad = Number(prompt('Ingresá la cantidad'));
@@ -115,9 +101,7 @@ do {
         totalCarrito += valorCompra;
         alert(`Agregaste al carrito ${cantidad} ${productos[1].titulo} a $${productos[1].precio} c/u. Total $ ${valorCompra}`);
         alert(`Total del carrito : $ ${totalCarrito}`);
-        // calculo(productos[1].titulo, productos[1].precio, productos[1].stock, cantidadPedida = Number(prompt('Cuantas queres?')));
-        // agregarAlCarrito(productos[1]);
-        // alert(`Agregaste al carrito ${cantidadPedida} ${productos[1].titulo} a $${productos[1].precio}`)
+        agregarAlCarrito(productos[1]);
 
     } else if (numero === 3) {
         let cantidad = Number(prompt('Ingresá la cantidad'));
@@ -125,9 +109,7 @@ do {
         totalCarrito += valorCompra;
         alert(`Agregaste al carrito ${cantidad} ${productos[2].titulo} a $${productos[2].precio} c/u. Total $ ${valorCompra}`);
         alert(`Total del carrito : $ ${totalCarrito}`);
-        // calculo(productos[2].titulo, productos[2].precio, productos[2].stock, cantidadPedida = Number(prompt('Cuantas queres?')));
-        // agregarAlCarrito(productos[2]);
-        // alert(`Agregaste al carrito ${cantidadPedida} ${productos[2].titulo} a $${productos[2].precio}`)
+        agregarAlCarrito(productos[2]);
 
     } else if (numero === 4) {
         let cantidad = Number(prompt('Ingresá la cantidad'));
@@ -135,9 +117,8 @@ do {
         totalCarrito += valorCompra;
         alert(`Agregaste al carrito ${cantidad} ${productos[3].titulo} a $${productos[3].precio} c/u. Total $ ${valorCompra}`);
         alert(`Total del carrito : $ ${totalCarrito}`);
-        // calculo(productos[3].titulo, productos[3].precio, productos[3].stock, cantidadPedida = Number(prompt('Cuantas queres?')));
-        // agregarAlCarrito(productos[3]);
-        // alert(`Agregaste al carrito ${cantidadPedida} ${productos[3].titulo} a $${productos[3].precio}`)
+        agregarAlCarrito(productos[3]);
+
 
     } else if (numero === 5) {
         let cantidad = Number(prompt('Ingresá la cantidad'));
@@ -145,9 +126,8 @@ do {
         totalCarrito += valorCompra;
         alert(`Agregaste al carrito ${cantidad} ${productos[4].titulo} a $${productos[4].precio} c/u. Total $ ${valorCompra}`);
         alert(`Total del carrito : $ ${totalCarrito}`);
-        // calculo(productos[4].titulo, productos[4].precio, productos[4].stock, cantidadPedida = Number(prompt('Cuantas queres?')));
-        // agregarAlCarrito(productos[4]);
-        // alert(`Agregaste al carrito ${cantidadPedida} ${productos[4].titulo} a $${productos[4].precio}`)
+        agregarAlCarrito(productos[4]);
+
 
     } else if (numero === 6) {
         let cantidad = Number(prompt('Ingresá la cantidad'));
@@ -155,9 +135,8 @@ do {
         totalCarrito += valorCompra;
         alert(`Agregaste al carrito ${cantidad} ${productos[5].titulo} a $${productos[5].precio} c/u. Total $ ${valorCompra}`);
         alert(`Total del carrito : $ ${totalCarrito}`);
-        // calculo(productos[5].titulo, productos[5].precio, productos[5].stock, cantidadPedida = Number(prompt('Cuantas queres?')));
-        // agregarAlCarrito(productos[5]);
-        // alert(`Agregaste al carrito ${cantidadPedida} ${productos[5].titulo} a $${productos[5].precio}`)
+        agregarAlCarrito(productos[5]);
+
 
     } else if (numero === 7) {
         let cantidad = Number(prompt('Ingresá la cantidad'));
@@ -165,9 +144,8 @@ do {
         totalCarrito += valorCompra;
         alert(`Agregaste al carrito ${cantidad} ${productos[6].titulo} a $${productos[6].precio} c/u. Total $ ${valorCompra}`);
         alert(`Total del carrito : $ ${totalCarrito}`);
-        // calculo(productos[6].titulo, productos[6].precio, productos[6].stock, cantidadPedida = Number(prompt('Cuantas queres?')));
-        // agregarAlCarrito(productos[6]);
-        // alert(`Agregaste al carrito ${cantidadPedida} ${productos[6].titulo} a $${productos[6].precio}`)
+        agregarAlCarrito(productos[6]);
+
 
     } else if (numero === 8) {
         let cantidad = Number(prompt('Ingresá la cantidad'));
@@ -175,9 +153,8 @@ do {
         totalCarrito += valorCompra;
         alert(`Agregaste al carrito ${cantidad} ${productos[7].titulo} a $${productos[7].precio} c/u. Total $ ${valorCompra}`);
         alert(`Total del carrito : $ ${totalCarrito}`);
-        // calculo(productos[7].titulo, productos[7].precio, productos[7].stock, cantidadPedida = Number(prompt('Cuantas queres?')));
-        // agregarAlCarrito(productos[7]);
-        // alert(`Agregaste al carrito ${cantidadPedida} ${productos[7].titulo} a $${productos[7].precio}`)
+        agregarAlCarrito(productos[7]);
+
 
     } else if (numero === 9) {
         let cantidad = Number(prompt('Ingresá la cantidad'));
@@ -185,16 +162,16 @@ do {
         totalCarrito += valorCompra;
         alert(`Agregaste al carrito ${cantidad} ${productos[8].titulo} a $${productos[8].precio} c/u. Total $ ${valorCompra}`);
         alert(`Total del carrito : $ ${totalCarrito}`);
-        // calculo(productos[8].titulo, productos[8].precio, productos[8].stock, cantidadPedida = Number(prompt('Cuantas queres?')));
-        // agregarAlCarrito(productos[8]);
-        // alert(`Agregaste al carrito ${cantidadPedida} ${productos[8].titulo} a $${productos[8].precio}`)
+        agregarAlCarrito(productos[8]);
+
 
     } else {
         alert('ingresaste mal el numero')
     }
-    // totalAPagar();
+    
     continuar = prompt('Desea continuar comprando? si o no');
 } while (continuar !== 'no');
+console.log(carrito);
 
 /*************************************************************************************************************************************                                                           DOM                       ************************************************************************************************************************************/
             // GENERADOR DE CARDS 
@@ -208,15 +185,15 @@ productosAMostrar.forEach(elemento => {
             <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">
                 ${(elemento.stock > 0) ? 'Disponible' : 'Sin Stock'}
             </div>
-                <img src="${elemento.img}" class="card-img-top" alt="Mermelada de Arandanos">
+                <img src="${(elemento.img === "")? '../assets/Nuna.png' : elemento.img}" class="card-img-top" alt="Mermelada de Arandanos">
                 <div class="card-body">
                 <h5 class="card-titulo">${elemento.titulo}</h5>
                 <input type="number" name="cant" id="cant">
-                        <button type="button" class="btn btn-warning">Añadir al Carrito</button>
+                <button type="button" class="btn btn-warning">Añadir al Carrito</button>
                 </div>
-            </div>
-    </div>
-    `
+                </div>
+                </div>
+                `
 });
 };
 generarCards(productos);
@@ -232,23 +209,11 @@ function buscador(){
 }
 //*************************************************************************************************************************************                                                 F U N C I O N E S *************************************************************************************************************************************
 
-// function calculo(){
-//     haystock = validarStock(productos[e].precio, cantidad);
-//     if (haystock){
-//         valorCompra = cantidad * productos[e].precio;
-//         totalCarrito += valorCompra;
-//         alert(`Agregaste al carrito ${cantidad} ${productos[e].titulo} a $${productos[e].precio} c/u. Total $ ${valorCompra}`);
-//         alert(`Total del carrito : $ ${totalCarrito}`);
-//     }else{
-//         alert('No hay Stock suficiente');
-//     }
-// }
-
 function validarStock(precio, cantidad) {
-    return (precio > cantidad);
-}
-
-
+        return (precio > cantidad);
+    }
+    
+    
 
 function total(cantidadPedida, precioProducto) {
     return (cantidadPedida * precioProducto);
@@ -260,10 +225,31 @@ function agregarAlCarrito(product) {
     carrito.push(product);
 }
 
+                    // PRUEBAS FALLIDAS DE FUNCIONES 
 
 
-// function totalAPagar() {
-//     const totalDelCarrito = carrito.reduce((acumulador, product) => acumulador += (product.precio * cantidadPedida), 0);
-//     console.log("Total del carrito:" + totalDelCarrito);
-//     alert("Total del carrito: $" + totalDelCarrito);
-// }
+    // const calculo = (nombreProducto, precioProducto, stockProducto, cantidadPedida, porcentaje) => {
+    
+    //     const hayStock = validarStock(stockProducto, cantidadPedida);
+    
+    //     const resultado = total(cantidadPedida, precioProducto);
+    
+    //     if (hayStock) {
+    //         console.log(`Agregaste al carrito ${cantidadPedida} ${nombreProducto} a $${precioProducto}. Total: $${resultado}`);
+    //     } else {
+    //         console.log('No tenemos el stock suficiente');
+    //     };
+    
+    // };
+    
+    // function calculo(){
+    //     haystock = validarStock(productos[e].precio, cantidad);
+    //     if (haystock){
+    //         valorCompra = cantidad * productos[e].precio;
+    //         totalCarrito += valorCompra;
+    //         alert(`Agregaste al carrito ${cantidad} ${productos[e].titulo} a $${productos[e].precio} c/u. Total $ ${valorCompra}`);
+    //         alert(`Total del carrito : $ ${totalCarrito}`);
+    //     }else{
+        //         alert('No hay Stock suficiente');
+        //     }
+        // }
