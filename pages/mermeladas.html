@@ -59,7 +59,7 @@
             <a class="nav-link" href="./contacto.html">Contacto</a>
           </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
+        <form action="#" class="form-inline my-2 my-lg-0">
           <input id='productoBuscado' class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search">
           <button onclick="buscador()" class="btn btn-outline-dark my-2 my-sm-0 bg-warning" type="submit">Buscar</button>
         </form>
@@ -68,9 +68,12 @@
           <button type="button" class="btn btn-outline-dark my-2 my-sm-0 bg-warning" data-toggle="modal"
             data-target="#exampleModal">
             <i class="bi-cart-fill me-1"></i>
-            Cart
+            Carrito
             <span class="badge bg-dark text-white ms-1 rounded-pill" id="cantidad-prod">
               0
+            </span>
+            <span class="badge bg-dark text-white ms-1 rounded-pill" id="total-carrito">
+              $0
             </span>
           </button>
           <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
@@ -78,17 +81,17 @@
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                  <h5 class="modal-title" id="exampleModalLabel">Carrito</h5><br>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
-                <div class="modal-body">
-                  ...
+                <div id="modalCarrito" class="modal-body">
+                  
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary">Save changes</button>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                  <button type="button" class="btn btn-primary">Comprar</button>
                 </div>
               </div>
             </div>

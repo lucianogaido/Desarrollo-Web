@@ -1,9 +1,9 @@
-let totalCarrito = 0;
+let totalCarrito = 0; 
                         // ARRAYS 
 const carrito = [];
 const productos = [{
         id: 1,
-        titulo: "Mermelada de Arandanos",
+        titulo:"Mermelada de Arandanos",
         precio: 500,
         stock: 100,
         img: "../assets/mermeladas/arandanos.png"
@@ -71,108 +71,6 @@ const productos = [{
 
     },
 ];
-let nombre = prompt('Hola, como te llamas?');
-alert(`Hola ${nombre}. Bievenido a Nuna`);
-
-
-
-do {
-    const numero = Number(prompt(`Que mermelada te gustaria comprar? Ingresa el número. 
-    1. Arandanos
-    2. Ciruela
-    3. Durazno
-    4. Frambuesa
-    5. Frutilla
-    6. Kiwi
-    7. Mandarina
-    8. Naranja
-    9. Tomate`));
-    if (numero === 1) {
-        let cantidad = Number(prompt('Ingresá la cantidad'));
-        let valorCompra = cantidad * productos[0].precio;
-        totalCarrito += valorCompra;
-        alert(`Agregaste al carrito ${cantidad} ${productos[0].titulo} a $${productos[0].precio} c/u. Total $ ${valorCompra}`);
-        alert(`Total del carrito : $ ${totalCarrito}`);
-        agregarAlCarrito(productos[0]);
-
-    } else if (numero === 2) {
-        let cantidad = Number(prompt('Ingresá la cantidad'));
-        let valorCompra = cantidad * productos[1].precio;
-        totalCarrito += valorCompra;
-        alert(`Agregaste al carrito ${cantidad} ${productos[1].titulo} a $${productos[1].precio} c/u. Total $ ${valorCompra}`);
-        alert(`Total del carrito : $ ${totalCarrito}`);
-        agregarAlCarrito(productos[1]);
-
-    } else if (numero === 3) {
-        let cantidad = Number(prompt('Ingresá la cantidad'));
-        let valorCompra = cantidad * productos[2].precio;
-        totalCarrito += valorCompra;
-        alert(`Agregaste al carrito ${cantidad} ${productos[2].titulo} a $${productos[2].precio} c/u. Total $ ${valorCompra}`);
-        alert(`Total del carrito : $ ${totalCarrito}`);
-        agregarAlCarrito(productos[2]);
-
-    } else if (numero === 4) {
-        let cantidad = Number(prompt('Ingresá la cantidad'));
-        let valorCompra = cantidad * productos[3].precio;
-        totalCarrito += valorCompra;
-        alert(`Agregaste al carrito ${cantidad} ${productos[3].titulo} a $${productos[3].precio} c/u. Total $ ${valorCompra}`);
-        alert(`Total del carrito : $ ${totalCarrito}`);
-        agregarAlCarrito(productos[3]);
-
-
-    } else if (numero === 5) {
-        let cantidad = Number(prompt('Ingresá la cantidad'));
-        let valorCompra = cantidad * productos[4].precio;
-        totalCarrito += valorCompra;
-        alert(`Agregaste al carrito ${cantidad} ${productos[4].titulo} a $${productos[4].precio} c/u. Total $ ${valorCompra}`);
-        alert(`Total del carrito : $ ${totalCarrito}`);
-        agregarAlCarrito(productos[4]);
-
-
-    } else if (numero === 6) {
-        let cantidad = Number(prompt('Ingresá la cantidad'));
-        let valorCompra = cantidad * productos[5].precio;
-        totalCarrito += valorCompra;
-        alert(`Agregaste al carrito ${cantidad} ${productos[5].titulo} a $${productos[5].precio} c/u. Total $ ${valorCompra}`);
-        alert(`Total del carrito : $ ${totalCarrito}`);
-        agregarAlCarrito(productos[5]);
-
-
-    } else if (numero === 7) {
-        let cantidad = Number(prompt('Ingresá la cantidad'));
-        let valorCompra = cantidad * productos[6].precio;
-        totalCarrito += valorCompra;
-        alert(`Agregaste al carrito ${cantidad} ${productos[6].titulo} a $${productos[6].precio} c/u. Total $ ${valorCompra}`);
-        alert(`Total del carrito : $ ${totalCarrito}`);
-        agregarAlCarrito(productos[6]);
-
-
-    } else if (numero === 8) {
-        let cantidad = Number(prompt('Ingresá la cantidad'));
-        let valorCompra = cantidad * productos[7].precio;
-        totalCarrito += valorCompra;
-        alert(`Agregaste al carrito ${cantidad} ${productos[7].titulo} a $${productos[7].precio} c/u. Total $ ${valorCompra}`);
-        alert(`Total del carrito : $ ${totalCarrito}`);
-        agregarAlCarrito(productos[7]);
-
-
-    } else if (numero === 9) {
-        let cantidad = Number(prompt('Ingresá la cantidad'));
-        let valorCompra = cantidad * productos[8].precio;
-        totalCarrito += valorCompra;
-        alert(`Agregaste al carrito ${cantidad} ${productos[8].titulo} a $${productos[8].precio} c/u. Total $ ${valorCompra}`);
-        alert(`Total del carrito : $ ${totalCarrito}`);
-        agregarAlCarrito(productos[8]);
-
-
-    } else {
-        alert('ingresaste mal el numero')
-    }
-    
-    continuar = prompt('Desea continuar comprando? si o no');
-} while (continuar !== 'no');
-console.log(carrito);
-
 /*************************************************************************************************************************************                                                           DOM                       ************************************************************************************************************************************/
             // GENERADOR DE CARDS 
 
@@ -188,8 +86,11 @@ productosAMostrar.forEach(elemento => {
                 <img src="${(elemento.img === "")? '../assets/Nuna.png' : elemento.img}" class="card-img-top" alt="Mermelada de Arandanos">
                 <div class="card-body">
                 <h5 class="card-titulo">${elemento.titulo}</h5>
-                <input type="number" name="cant" id="cant">
-                <button type="button" class="btn btn-warning">Añadir al Carrito</button>
+                <input value= "1" min="1" id="cantidad-${elemento.id}" type="number" name="cant" id="cant">
+                <button type="button" class="btn btn-warning"
+                onclick="agregarAlCarrito(${elemento.id})">
+                Añadir al Carrito
+                </button>
                 </div>
                 </div>
                 </div>
@@ -197,8 +98,34 @@ productosAMostrar.forEach(elemento => {
 });
 };
 generarCards(productos);
+                            //  GENERADOR DE CARDS EN MODAL CARRITO
 
-            // BUSCADOR 
+function cardsEnCarrito (productosCarrito){
+    let acumuladorProductosCarrito = '';
+productosCarrito.forEach((elemento) => {
+    acumuladorProductosCarrito +=`
+        <div class="card mb-3" style="max-width: 540px;">
+            <div class="row no-gutters">
+                <div class="col-sm-4">
+                <img src="${(elemento.img === "")? '../assets/Nuna.png' : elemento.img}" alt="Imagen producto ${elemento.titulo}">
+                </div>
+                <div class="col-sm-8 card-body">
+                    <h5 class="card-title">${elemento.titulo}</h5>
+                </div>
+            </div>
+        </div>
+    `
+});
+    mostrarProductosCarrito(acumuladorProductosCarrito);
+};
+
+function mostrarProductosCarrito(cards){
+    document.getElementById("modalCarrito").innerHTML = cards;
+}
+
+cardsEnCarrito(carrito);
+
+            //      BUSCADOR 
 
 function buscador(){
     const nombreProductoBuscado = document.getElementById('productoBuscado').value.toUpperCase().trim();
@@ -209,47 +136,20 @@ function buscador(){
 }
 //*************************************************************************************************************************************                                                 F U N C I O N E S *************************************************************************************************************************************
 
-function validarStock(precio, cantidad) {
-        return (precio > cantidad);
-    }
+const agregarAlCarrito = (idProducto) =>{
     
-    
-
-function total(cantidadPedida, precioProducto) {
-    return (cantidadPedida * precioProducto);
+    const valorDeCantidad = document.getElementById(`cantidad-${idProducto}`).value; //VALOR DE LA CANTIDAD DE PRODUCTOS SELECCIONADA
+    const productoAgregado = productos.find(producto => producto.id === idProducto ); //ACCEDO AL PRODUCTO SELECCIONADO
+    productoAgregado.cantidad = valorDeCantidad;
+    if (productoAgregado.stock > productoAgregado.cantidad){            //COMPRUEBO SI HAY STOCK
+    carrito.push (productoAgregado);
+    productoAgregado.stock -- ;
+    document.getElementById("cantidad-prod").innerHTML = carrito.length;    //DIFERENTES PRODUCTOS AGREGADOS AL CARRITO ...    (Todavia no logro sumar el total de productos agregado, me concatena los valores)
+    let valorCompra = productoAgregado.precio * productoAgregado.cantidad;
+    totalCarrito += valorCompra;                                            //ACUMULO EL TOTAL DEL CARRITO
+    document.getElementById("total-carrito").innerHTML = "$" + totalCarrito;  //PRECIO TOTAL EN BOTON CARRITO
+    cardsEnCarrito(carrito);
+}else{                  // SI NO HAY STOCK
+    alert(`No hay stock suficiente`);
+};
 }
-
-
-
-function agregarAlCarrito(product) {
-    carrito.push(product);
-}
-
-                    // PRUEBAS FALLIDAS DE FUNCIONES 
-
-
-    // const calculo = (nombreProducto, precioProducto, stockProducto, cantidadPedida, porcentaje) => {
-    
-    //     const hayStock = validarStock(stockProducto, cantidadPedida);
-    
-    //     const resultado = total(cantidadPedida, precioProducto);
-    
-    //     if (hayStock) {
-    //         console.log(`Agregaste al carrito ${cantidadPedida} ${nombreProducto} a $${precioProducto}. Total: $${resultado}`);
-    //     } else {
-    //         console.log('No tenemos el stock suficiente');
-    //     };
-    
-    // };
-    
-    // function calculo(){
-    //     haystock = validarStock(productos[e].precio, cantidad);
-    //     if (haystock){
-    //         valorCompra = cantidad * productos[e].precio;
-    //         totalCarrito += valorCompra;
-    //         alert(`Agregaste al carrito ${cantidad} ${productos[e].titulo} a $${productos[e].precio} c/u. Total $ ${valorCompra}`);
-    //         alert(`Total del carrito : $ ${totalCarrito}`);
-    //     }else{
-        //         alert('No hay Stock suficiente');
-        //     }
-        // }
