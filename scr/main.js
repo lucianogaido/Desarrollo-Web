@@ -1,11 +1,11 @@
-let totalCarrito = 0; 
+// let totalCarrito = 0; 
                         // ARRAYS 
-const carrito = [];
+// const carrito = [];
 const productos = [{
         id: 1,
         titulo:"Mermelada de Arandanos",
         precio: 500,
-        stock: 100,
+        stock: 0,
         img: "../assets/mermeladas/arandanos.png"
     },
     {
@@ -87,8 +87,9 @@ productosAMostrar.forEach(elemento => {
                 <div class="card-body">
                 <h5 class="card-titulo">${elemento.titulo}</h5>
                 <input value= "1" min="1" id="cantidad-${elemento.id}" type="number" name="cant" id="cant">
-                <button type="button" class="btn btn-warning"
-                onclick="agregarAlCarrito(${elemento.id})">
+                <button type="button" class="boton btn btn-warning"
+                ${(elemento.stock == 0)? 'disabled = "disabled"': 0}
+                onclick="agregarAlCarrito(${elemento.id})" >
                 Añadir al Carrito
                 </button>
                 </div>
@@ -97,6 +98,7 @@ productosAMostrar.forEach(elemento => {
                 `
 });
 };
+
 generarCards(productos);
                             //  GENERADOR DE CARDS EN MODAL CARRITO
 
@@ -104,6 +106,9 @@ function cardsEnCarrito (productosCarrito){
     let acumuladorProductosCarrito = '';
 productosCarrito.forEach((elemento) => {
     acumuladorProductosCarrito +=`
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
         <div class="card mb-3" style="max-width: 540px;">
             <div class="row no-gutters">
                 <div class="col-sm-4">
@@ -113,6 +118,7 @@ productosCarrito.forEach((elemento) => {
                     <h5 class="card-title">${elemento.titulo}</h5>
                 </div>
             </div>
+            <button type="button" class=" removeFromCartPage btn-close" id="removeButton" aria-label="Close"></button>
         </div>
     `
 });
@@ -143,12 +149,13 @@ const agregarAlCarrito = (idProducto) =>{
     productoAgregado.cantidad = valorDeCantidad;
     if (productoAgregado.stock > productoAgregado.cantidad){            //COMPRUEBO SI HAY STOCK
     carrito.push (productoAgregado);
+    localStorage.setItem("carrito", JSON.stringify(carrito));           // ACTUALIZO STORAGE
     productoAgregado.stock -- ;
     document.getElementById("cantidad-prod").innerHTML = carrito.length;    //DIFERENTES PRODUCTOS AGREGADOS AL CARRITO ...    (Todavia no logro sumar el total de productos agregado, me concatena los valores)
     let valorCompra = productoAgregado.precio * productoAgregado.cantidad;
     totalCarrito += valorCompra;                                            //ACUMULO EL TOTAL DEL CARRITO
-    document.getElementById("total-carrito").innerHTML = "$" + totalCarrito;  //PRECIO TOTAL EN BOTON CARRITO
-    cardsEnCarrito(carrito);
+
+    cardsEnCarrito(carrito);         //  ENVIO CARD AL CARRITO 
 }else{                  // SI NO HAY STOCK
     alert(`No hay stock suficiente`);
 };
