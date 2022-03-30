@@ -86,6 +86,7 @@ productosAMostrar.forEach(elemento => {
                 <img src="${(elemento.img === "")? '../assets/Nuna.png' : elemento.img}" class="card-img-top" alt="Mermelada de Arandanos">
                 <div class="card-body">
                 <h5 class="card-titulo">${elemento.titulo}</h5>
+                <p><span>Precio: $${elemento.precio}</span></p>
                 <input value= "1" min="1" id="cantidad-${elemento.id}" type="number" name="cant" id="cant">
                 <button type="button" class="boton btn btn-warning"
                 ${(elemento.stock == 0)? 'disabled = "disabled"': 0}
@@ -106,19 +107,18 @@ function cardsEnCarrito (productosCarrito){
     let acumuladorProductosCarrito = '';
 productosCarrito.forEach((elemento) => {
     acumuladorProductosCarrito +=`
-    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-    </button>
-        <div class="card mb-3" style="max-width: 540px;">
+        <div class="card mb-3 " style="max-width: 540px;">
             <div class="row no-gutters">
                 <div class="col-sm-4">
                 <img src="${(elemento.img === "")? '../assets/Nuna.png' : elemento.img}" alt="Imagen producto ${elemento.titulo}">
                 </div>
-                <div class="col-sm-8 card-body">
+                <div class="col-sm-4 card-body">
                     <h5 class="card-title">${elemento.titulo}</h5>
                 </div>
+                
+                <div col-sm-2><p><span>$${elemento.precio}</span></p></div>
             </div>
-            <button type="button" class=" removeFromCartPage btn-close" id="removeButton" aria-label="Close"></button>
+            <button type="button" class="btn btn-danger">Eliminar</button>
         </div>
     `
 });
@@ -160,3 +160,24 @@ const agregarAlCarrito = (idProducto) =>{
     alert(`No hay stock suficiente`);
 };
 }
+
+//  remover del carrito (todavia averiguando cómo eliminar el producto del storage)
+
+const removerDelCarrito = document.getElementsByClassName("btn-danger");
+for(let i = 0; i <removerDelCarrito.length; i++){
+    let boton = removerDelCarrito[i];
+    boton.addEventListener("click", function(evento){
+        let botonClickeado = event.target;
+        botonClickeado.parentElement.remove();
+    })
+}
+
+// VACIAR CARRITO   (todavia creando esta funcion)
+// const vaciarCarrito = document.getElementById("vaciarCarrito");
+// for(let i = 0; i <vaciarCarrito.length; i++){
+//     let boton = vaciarCarrito[i];
+//     boton.addEventListener("click", function(evento){
+//         let botonClickeado = event.target;
+//         botonClickeado.parentElement.parentElement.remove();
+//     })
+// }
