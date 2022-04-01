@@ -10,6 +10,8 @@
   <meta name="keywords"
     content="mermeladas, frutos, frutilla, frambuesa, durazno, ciruela, naranja, mandarina, tomate, kiwi, arandanos">
   <title>Mermeladas</title>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js" defer></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js" defer></script>
   <script src="../scr/carrito.js" defer></script>
   <script src="../scr/main.js" defer></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
@@ -19,6 +21,7 @@
     integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="shortcut icon" href="../assets/Nuna.svg" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 
 </head>
 
@@ -92,7 +95,9 @@
                 <div id="modalCarrito" class="modal-body">
                   
                 </div>
-                <div class="col-lg-2 offset-lg-10">Total</div>
+                <span class="badge bg-dark text-white ms-1 rounded-pill" id="total-precio">
+                  Total a pagar : $ 0
+                </span>
                 <div class="modal-footer">
                   <button type="button" id="vaciarCarrito" class="btn btn-secondary" >Vaciar</button>
                   <button type="button" class="btn btn-primary">Comprar</button>

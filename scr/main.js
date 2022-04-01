@@ -5,14 +5,16 @@ const productos = [{
         id: 1,
         titulo:"Mermelada de Arandanos",
         precio: 500,
-        stock: 0,
+        stock: 10,
+        cantidad: 0,
         img: "../assets/mermeladas/arandanos.png"
     },
     {
         id: 2,
         titulo: "Mermelada de Ciruela",
         precio: 500,
-        stock: 0,
+        stock: 5,
+        cantidad: 0,
         img: "../assets/mermeladas/ciruela.png"
     },
     {
@@ -20,6 +22,7 @@ const productos = [{
         titulo: "Mermelada de Durazno",
         precio: 500,
         stock: 100,
+        cantidad: 0,
         img: "../assets/mermeladas/durazno.png"
     },
     {
@@ -27,6 +30,7 @@ const productos = [{
         titulo: "Mermelada de Frambuesa",
         precio: 500,
         stock: 100,
+        cantidad: 0,
         img: "../assets/mermeladas/frambuesa.png"
 
     },
@@ -35,6 +39,7 @@ const productos = [{
         titulo: "Mermelada de Frutilla",
         precio: 500,
         stock: 100,
+        cantidad: 0,
         img: "../assets/mermeladas/frutilla.png"
 
     },
@@ -43,6 +48,7 @@ const productos = [{
         titulo: "Mermelada de Kiwi",
         precio: 500,
         stock: 100,
+        cantidad: 0,
         img: "../assets/mermeladas/kiwi.png"
 
     },
@@ -51,6 +57,7 @@ const productos = [{
         titulo: "Mermelada de Mandarina",
         precio: 500,
         stock: 100,
+        cantidad: 0,
         img: "../assets/mermeladas/mandarina.png"
 
     },
@@ -58,7 +65,8 @@ const productos = [{
         id: 8,
         titulo: "Mermelada de Naranja",
         precio: 500,
-        stock: 100,
+        stock: 6,
+        cantidad: 0,
         img: ""
 
     },
@@ -66,7 +74,8 @@ const productos = [{
         id: 9,
         titulo: "Mermelada de Tomate",
         precio: 500,
-        stock: 100,
+        stock: 0,
+        cantidad: 0,
         img: "../assets/mermeladas/tomate.png"
 
     },
@@ -89,7 +98,7 @@ productosAMostrar.forEach(elemento => {
                 <p><span>Precio: $${elemento.precio}</span></p>
                 <input value= "1" min="1" id="cantidad-${elemento.id}" type="number" name="cant" id="cant">
                 <button type="button" class="boton btn btn-warning"
-                ${(elemento.stock == 0)? 'disabled = "disabled"': 0}
+                ${(elemento.stock == 0) && "disabled"}
                 onclick="agregarAlCarrito(${elemento.id})" >
                 Añadir al Carrito
                 </button>
@@ -115,10 +124,10 @@ productosCarrito.forEach((elemento) => {
                 <div class="col-sm-4 card-body">
                     <h5 class="card-title">${elemento.titulo}</h5>
                 </div>
-                
                 <div col-sm-2><p><span>$${elemento.precio}</span></p></div>
+                <div col-sm-2><p><span>${elemento.cantidad}</span></p></div>
             </div>
-            <button type="button" class="btn btn-danger">Eliminar</button>
+            <button onclick="removerUnProducto(${elemento.id})" type="button" class="btn btn-danger">Eliminar</button>
         </div>
     `
 });
@@ -152,32 +161,60 @@ const agregarAlCarrito = (idProducto) =>{
     localStorage.setItem("carrito", JSON.stringify(carrito));           // ACTUALIZO STORAGE
     productoAgregado.stock -- ;
     document.getElementById("cantidad-prod").innerHTML = carrito.length;    //DIFERENTES PRODUCTOS AGREGADOS AL CARRITO ...    (Todavia no logro sumar el total de productos agregado, me concatena los valores)
+
     let valorCompra = productoAgregado.precio * productoAgregado.cantidad;
     totalCarrito += valorCompra;                                            //ACUMULO EL TOTAL DEL CARRITO
 
-    cardsEnCarrito(carrito);         //  ENVIO CARD AL CARRITO 
+    cardsEnCarrito(carrito);         //  ENVIO CARD AL CARRITO
+    totalDelCarrito(); 
+    // SWEET ALERT
+    swal({
+        title: `Agregaste ${productoAgregado.titulo} al Carrito!`,
+        icon: "success",
+        button: "Continuar comprando",
+});
 }else{                  // SI NO HAY STOCK
-    alert(`No hay stock suficiente`);
+    swal({
+        title: `No tenemos Stock suficiente de ${productoAgregado.titulo}`,
+        text: "Intenta con una cantidad menor",
+        icon: "success",
+        button: "Continuar comprando",
+});;
 };
 }
 
-//  remover del carrito (todavia averiguando cómo eliminar el producto del storage)
+//  remover del carrito
 
-const removerDelCarrito = document.getElementsByClassName("btn-danger");
-for(let i = 0; i <removerDelCarrito.length; i++){
-    let boton = removerDelCarrito[i];
-    boton.addEventListener("click", function(evento){
-        let botonClickeado = event.target;
-        botonClickeado.parentElement.remove();
-    })
-}
+function removerUnProducto(idProducto) {
+    const productoARemover = carrito.find(producto => producto.id === idProducto);
+    let indexDelProducto = carrito.indexOf(productoARemover);
+        carrito.splice((indexDelProducto), 1);
+        productoARemover.stock++;
+        productoARemover.cantidad--;
+    cardsEnCarrito(carrito);
+    totalDelCarrito();
+    document.getElementById("cantidad-prod").innerHTML = carrito.length;
+    localStorage.setItem('carrito', JSON.stringify(carrito));
+    //    TOASTIFY
+    Toastify({
+        text: `Eliminaste ${productoARemover.titulo}`,
+        duration: 3000,
+        close: true,
+        gravity: "bottom",
+        position: "right", 
+        stopOnFocus: true,
+        style: {
+            background: "linear-gradient(to right, #00b09b, #96c93d)",
+        },
+        onClick: function(){}
+    }).showToast();
+};
 
-// VACIAR CARRITO   (todavia creando esta funcion)
-// const vaciarCarrito = document.getElementById("vaciarCarrito");
-// for(let i = 0; i <vaciarCarrito.length; i++){
-//     let boton = vaciarCarrito[i];
-//     boton.addEventListener("click", function(evento){
-//         let botonClickeado = event.target;
-//         botonClickeado.parentElement.parentElement.remove();
-//     })
-// }
+
+
+
+function totalDelCarrito() {
+    const precioTotalCarrito = carrito.reduce((acc, productoAgregado) => ( acc + productoAgregado.precio ), 0);
+    document.getElementById("total-precio").innerHTML = `Total a pagar : $${precioTotalCarrito}`;
+};
+
