@@ -116,18 +116,18 @@ function cardsEnCarrito (productosCarrito){
     let acumuladorProductosCarrito = '';
 productosCarrito.forEach((elemento) => {
     acumuladorProductosCarrito +=`
-        <div class="card mb-3 " style="max-width: 540px;">
-            <div class="row no-gutters">
-                <div class="col-sm-4">
-                <img src="${(elemento.img === "")? '../assets/Nuna.png' : elemento.img}" alt="Imagen producto ${elemento.titulo}">
+        <div class="cart-items">
+            <div class="cart-row">
+                <div class="cart-item cart-column">
+                <img src="${(elemento.img === "")? '../assets/Nuna.png' : elemento.img}" alt="Imagen producto ${elemento.titulo}" width="100" height="100">
+                    <span class="cart-item-title">${elemento.titulo}</span>
                 </div>
-                <div class="col-sm-4 card-body">
-                    <h5 class="card-title">${elemento.titulo}</h5>
+                <span class="cart-price cart-column">$${elemento.precio}</span>
+                <div class="cart-quantity cart-column">
+                    <input class="cart-quantity-input" type="number" value= "${elemento.cantidad}">
+                    <button onclick="removerUnProducto(${elemento.id})" class="btn btn-danger" type="button">REMOVE</button>
                 </div>
-                <div col-sm-2><p><span>$${elemento.precio}</span></p></div>
-                <div col-sm-2><p><span>${elemento.cantidad}</span></p></div>
             </div>
-            <button onclick="removerUnProducto(${elemento.id})" type="button" class="btn btn-danger">Eliminar</button>
         </div>
     `
 });
@@ -160,13 +160,10 @@ const agregarAlCarrito = (idProducto) =>{
     carrito.push (productoAgregado);
     localStorage.setItem("carrito", JSON.stringify(carrito));           // ACTUALIZO STORAGE
     productoAgregado.stock -- ;
-    document.getElementById("cantidad-prod").innerHTML = carrito.length;    //DIFERENTES PRODUCTOS AGREGADOS AL CARRITO ...    (Todavia no logro sumar el total de productos agregado, me concatena los valores)
-
-    let valorCompra = productoAgregado.precio * productoAgregado.cantidad;
-    totalCarrito += valorCompra;                                            //ACUMULO EL TOTAL DEL CARRITO
-
+    cantProdCarrito();                //TOTAL PRODUCTOS EN CARRITO
     cardsEnCarrito(carrito);         //  ENVIO CARD AL CARRITO
-    totalDelCarrito(); 
+    totalDelCarrito();
+     
     // SWEET ALERT
     swal({
         title: `Agregaste ${productoAgregado.titulo} al Carrito!`,
@@ -214,7 +211,31 @@ function removerUnProducto(idProducto) {
 
 
 function totalDelCarrito() {
-    const precioTotalCarrito = carrito.reduce((acc, productoAgregado) => ( acc + productoAgregado.precio ), 0);
-    document.getElementById("total-precio").innerHTML = `Total a pagar : $${precioTotalCarrito}`;
+    const precioTotalCarrito = carrito.reduce((acc, productoAgregado) => ( acc + (productoAgregado.precio * productoAgregado.cantidad )), 0);
+    document.getElementById("total-precio").innerHTML = `$${precioTotalCarrito}`;
+    localStorage.setItem("totalCarrito", JSON.stringify(precioTotalCarrito));
 };
 
+// FUNCION QUE NO ME ANDA COMO QUIERO. CONCATENA LOS NUMEROS 
+
+function cantProdCarrito(){
+    const cantidadTotalCarrito = carrito.reduce((acc, productoAgregado) => ( acc + Number(productoAgregado.cantidad)), 0);
+    document.getElementById("cantidad-prod").innerHTML = cantidadTotalCarrito;
+}
+// cantProdCarrito();
+
+// const mostrarProductos = (hayProductos)=> {
+//     return new Promise ((resolve, reject)=>{
+//         setTimeout(()=> {
+//             hayProductos? resolve(generarCards(productos)): reject("No hay productos");
+//         },3000)
+//         })
+//     }
+
+//     mostrarProductos(productos!= "").then((response)=>{
+//         generarCards(productos)
+//     }).catch((productos=="") =>{
+//         alert("No hay productos")
+//     }).finally(()=>{
+
+//     })
