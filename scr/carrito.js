@@ -22,4 +22,5 @@ function validarStorageTotal(){
     }else{
         return [];
     }
-}
+};
+

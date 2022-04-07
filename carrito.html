@@ -49,7 +49,7 @@
 
  <!-- MI CREACIÓN DE  CARDS DEL CARRITO  -->
 
-<div class="card mb-3 " style="max-width: 540px;">
+<!-- <div class="card mb-3 " style="max-width: 540px;">
     <div class="row no-gutters">
         <div class="col-sm-4">
         <img src="${(elemento.img === "")? '../assets/Nuna.png' : elemento.img}" alt="Imagen producto ${elemento.titulo}">
@@ -64,3 +64,49 @@
     </div>
     <button onclick="removerUnProducto(${elemento.id})" type="button" class="btn btn-danger">Eliminar</button>
 </div> -->
+
+localStorage.setItem("totalCarrito", JSON.stringify(total_carrito())); -->
+
+
+const agregarAlCarrito = (idProducto) =>{
+    
+    const valorDeCantidad = document.getElementById(`cantidad-${idProducto}`).value; //VALOR DE LA CANTIDAD DE PRODUCTOS SELECCIONADA
+    const productoAgregado = productos.find(producto => producto.id === idProducto ); //ACCEDO AL PRODUCTO SELECCIONADO
+    productoAgregado.cantidad = valorDeCantidad;
+    const productoExistente = carrito.find((producto) => producto.id === productoAgregado.id);
+    if ((productoAgregado.stock > productoAgregado.cantidad) && (productoExistente === undefined)){            //COMPRUEBO SI HAY STOCK
+            carrito.push (productoAgregado);
+            localStorage.setItem("carrito", JSON.stringify(carrito));           // ACTUALIZO STORAGE
+            productoAgregado.stock - valorDeCantidad ;
+            cantProdCarrito();                //TOTAL PRODUCTOS EN CARRITO
+            cardsEnCarrito(carrito);         //  ENVIO CARD AL CARRITO
+            totalDelCarrito();
+     
+    // SWEET ALERT
+    swal({
+        title: `Agregaste ${productoAgregado.titulo} al Carrito!`,
+        icon: "success",
+        button: "Continuar comprando",
+    });
+}else if ((productoAgregado.stock > productoAgregado.cantidad) && (productoExistente.id === productoAgregado.id)){
+
+            productoExistente.cantidad += Number(valorDeCantidad);
+            localStorage.setItem("carrito", JSON.stringify(carrito));
+            productoAgregado.stock - valorDeCantidad ;
+            cantProdCarrito();
+            totalDelCarrito();
+            swal({
+                title: `Agregaste ${productoAgregado.titulo} al Carrito!`,
+                icon: "success",
+                button: "Continuar comprando",
+        });
+
+        }else{                  // SI NO HAY STOCK
+            swal({
+                title: `No tenemos Stock suficiente de ${productoAgregado.titulo}`,
+                text: "Intenta con una cantidad menor",
+                icon: "success",
+                button: "Continuar comprando",
+});;
+};
+}

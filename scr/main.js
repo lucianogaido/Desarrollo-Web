@@ -96,7 +96,7 @@ productosAMostrar.forEach(elemento => {
                 <div class="card-body">
                 <h5 class="card-titulo">${elemento.titulo}</h5>
                 <p><span>Precio: $${elemento.precio}</span></p>
-                <input value= "1" min="1" id="cantidad-${elemento.id}" type="number" name="cant" id="cant">
+                <input value= "1" min="1" class="cart-quantity-input" id="cantidad-${elemento.id}" type="number" name="cant" id="cant">
                 <button type="button" class="boton btn btn-warning"
                 ${(elemento.stock == 0) && "disabled"}
                 onclick="agregarAlCarrito(${elemento.id})" >
@@ -124,8 +124,10 @@ productosCarrito.forEach((elemento) => {
                 </div>
                 <span class="cart-price cart-column">$${elemento.precio}</span>
                 <div class="cart-quantity cart-column">
-                    <input class="cart-quantity-input" type="number" value= "${elemento.cantidad}">
-                    <button onclick="removerUnProducto(${elemento.id})" class="btn btn-danger" type="button">REMOVE</button>
+                    <button type="button" class="badge btn btn-warning ms-1 rounded-pill">-</button>
+                    <input class="cart-quantity-input"  value= "${elemento.cantidad}">
+                    <button type="button" onclick="agregarUno(${elemento.id})" id="cantidadMas" class="badge btn btn-warning ms-1 rounded-pill">+</button>
+                    <button onclick="removerUnProducto(${elemento.id})" class="btn btn-danger" type="button">QUITAR</button>
                 </div>
             </div>
         </div>
@@ -147,7 +149,14 @@ function buscador(){
     const productosEncontrados = productos.filter((producto) => {
         return producto.titulo.toUpperCase().match(nombreProductoBuscado);
     });
-    generarCards(productosEncontrados);
+    if (nombreProductoBuscado != ''){
+        document.getElementById("cards").innerHTML = `<div class="col-lg-12"><h2>Resultados que coinciden con "${nombreProductoBuscado}"</h2></div>`;
+        generarCards(productosEncontrados);
+    }
+    // } else {
+    //     document.getElementById("cards").innerHTML = `<div class="col-lg-12"><h2>Debes ingresar un valor de búsqueda</h2></div>`;
+    //     generarCards([]);
+    // };
 }
 //*************************************************************************************************************************************                                                 F U N C I O N E S *************************************************************************************************************************************
 
@@ -159,7 +168,7 @@ const agregarAlCarrito = (idProducto) =>{
     if (productoAgregado.stock > productoAgregado.cantidad){            //COMPRUEBO SI HAY STOCK
     carrito.push (productoAgregado);
     localStorage.setItem("carrito", JSON.stringify(carrito));           // ACTUALIZO STORAGE
-    productoAgregado.stock -- ;
+    productoAgregado.stock - (Number(valorDeCantidad)) ;
     cantProdCarrito();                //TOTAL PRODUCTOS EN CARRITO
     cardsEnCarrito(carrito);         //  ENVIO CARD AL CARRITO
     totalDelCarrito();
@@ -207,7 +216,12 @@ function removerUnProducto(idProducto) {
     }).showToast();
 };
 
+//             ESTA FUNCION NO ME ANDA
 
+// function agregarUno(idProducto){
+//     const productoAgregado = carrito.findIndex(producto => producto.id === idProducto );
+//     carrito[productoAgregado].cantidad += 1;
+// };
 
 
 function totalDelCarrito() {
@@ -215,8 +229,6 @@ function totalDelCarrito() {
     document.getElementById("total-precio").innerHTML = `$${precioTotalCarrito}`;
     localStorage.setItem("totalCarrito", JSON.stringify(precioTotalCarrito));
 };
-
-// FUNCION QUE NO ME ANDA COMO QUIERO. CONCATENA LOS NUMEROS 
 
 function cantProdCarrito(){
     const cantidadTotalCarrito = carrito.reduce((acc, productoAgregado) => ( acc + Number(productoAgregado.cantidad)), 0);
