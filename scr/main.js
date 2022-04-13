@@ -167,10 +167,19 @@ function removerUnProducto(idProducto) {
 //             FUNCION AUMENTAR CANTIDAD EN MODAL CARRITO
 
 function agregarUno(idProducto) {
+    const producto = productos.find(producto => producto.id === idProducto);
     const productoAgregado = carrito.findIndex(producto => producto.id === idProducto);
+    if (producto.stock > carrito[productoAgregado].cantidad){
     carrito[productoAgregado].cantidad++;
     cardsEnCarrito(carrito);
     totalDelCarrito();
+    } else{
+        swal({
+        title: `No tenemos Stock suficiente de ${producto.titulo}`,
+        text: "Intenta con una cantidad menor",
+        icon: 'error',
+        button: "Continuar comprando",
+    });}
 };
 
 //             FUNCION RESTAR CANTIDAD EN MODAL CARRITO
