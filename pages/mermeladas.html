@@ -19,9 +19,9 @@
     crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
     integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
-    <link rel="stylesheet" href="../css/styles.css">
-    <link rel="shortcut icon" href="../assets/Nuna.svg" type="image/x-icon">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="shortcut icon" href="../assets/Nuna.svg" type="image/x-icon">
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 
 </head>
 
@@ -64,8 +64,10 @@
           </li>
         </ul>
         <form action="#" class="form-inline my-2 my-lg-0">
-          <input id='productoBuscado' class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search">
-          <button onclick="buscador()" class="btn btn-outline-dark my-2 my-sm-0 bg-warning" type="submit">Buscar</button>
+          <input id='productoBuscado' class="form-control mr-sm-2" type="search" placeholder="Buscar"
+            aria-label="Search">
+          <button onclick="buscador()" class="btn btn-outline-dark my-2 my-sm-0 bg-warning"
+            type="submit">Buscar</button>
         </form>
         <!-- BOTON CARRITO   -->
         <form class="d-flex">
@@ -86,37 +88,21 @@
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
-                  
                 </div>
-                <!-- <section class="container row">
-                  <div class="col-lg-2 offset-lg-8" >Precio</div>
-                  <div class="col-lg-2 ">Cantidad</div>
-                </section> -->
-                    <!-- CODIGO COPIADO -->
                 <div class="cart-row">
                   <span class="cart-item cart-header cart-column">Producto</span>
                   <span class="cart-price cart-header cart-column">Precio</span>
                   <span class="cart-quantity cart-header cart-column">Cantidad</span>
-              </div>
-                    <!-- / CODIGO COPIADO  -->
-
-                <div id="modalCarrito" class="modal-body">
-                  
                 </div>
-                <!-- <span class="badge bg-dark text-white ms-1 rounded-pill" id="total-precio">
-                  Total a pagar : $ 0
-                </span> -->
+                <div id="modalCarrito" class="modal-body">
 
-                    <!-- CODIGO COPIADO -->
-
+                </div>
                 <div class="cart-total">
                   <strong class="cart-total-title">Total</strong>
                   <span class="cart-total-price" id="total-precio">$0</span>
-              </div>
-                    <!-- / CODIGO COPIADO  -->
-
+                </div>
                 <div class="modal-footer">
-                  <button type="button" id="vaciarCarrito" class="btn btn-secondary" >Vaciar</button>
+                  <button type="button" id="vaciarCarrito" class="btn btn-secondary">Vaciar</button>
                   <button type="button" class="btn btn-primary">Comprar</button>
                 </div>
               </div>
